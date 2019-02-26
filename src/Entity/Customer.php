@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,19 +32,19 @@ class Customer
      */
     private $password;
  
-    function getId() {
+    function getId(): ?int {
         return $this->id;
     }
 
-    function getName() {
+    function getName(): ?string {
         return $this->name;
     }
 
-    function getEMail() {
+    function getEMail(): ?string {
         return $this->eMail;
     }
 
-    function getPassword() {
+    function getPassword(): ?string {
         return $this->password;
     }
 
@@ -52,18 +52,22 @@ class Customer
         $this->id = $id;
     }
 
-    function setName($name) {
+    function setName(string $name): self {
         $this->name = $name;
+        
+        return $this;
     }
 
-    function setEMail($eMail) {
+    function setEMail(string $eMail): self{
         $this->eMail = $eMail;
+        
+        return $this;
+        
     }
 
-    function setPassword($password) {
+    function setPassword(string $password): self {
         $this->password = $password;
-    }
-
-
-    
+        
+        return $this;
+    } 
 }

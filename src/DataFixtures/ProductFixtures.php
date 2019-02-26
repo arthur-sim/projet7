@@ -9,7 +9,7 @@ class ProductFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {     
-        foreach ($this->getproductData() as [ $brand, $name, $year]) {
+        foreach ($this->getProductData() as [ $brand, $name, $year]) {
             $product = (new Product())
                     ->setBrand($brand)
                     ->setName($name)
