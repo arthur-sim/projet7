@@ -36,6 +36,12 @@ class User
      */
     private $city;
 
+     /**
+   * @ORM\ManyToOne(targetEntity="Customer")
+   * @ORM\JoinColumn(nullable=false)
+   */
+    private $customer;
+    
     public function getId(): ?int
     {
         return $this->id;
