@@ -7,17 +7,23 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Serializer\SerializerInterface;
 
-class ExceptionListener implements EventSubscriberInterface
+class ExceptionSubscriber implements EventSubscriberInterface
 {
     private $normalizers;
-    
+    private $serializer;
+
+    public function __construct(SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+        $this->normalizers = [];
+    }
     public function processException(GetResponseForExceptionEvent $event)
     {
         $result = null;
-
         foreach ($this->normalizers as $normalizer) {
-            if ($normalizer->supports($exception)) {
+            if ($normalizer->supports($event->getException())) {
                 $result = $normalizer->normalize($event->getException());
                 
                 break;
@@ -25,15 +31,15 @@ class ExceptionListener implements EventSubscriberInterface
         }
         
         if (null == $result) {
-            $result['code'] = Response::HTTP_BAD_REQUEST;
+            $result['code'] = Response::HTTP_INTERNAL_SERVER_ERROR;
 
             $result['body'] = [
-                'code' => Response::HTTP_BAD_REQUEST,
-                'message' => $event->getException()->getMessage()
+                'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
+                'message' => 'internal server error'
             ];
         }
 
-        $body = $this->json($result['body']);
+         $body = $this->serializer->serialize($result['body'], 'json');
 
         $event->setResponse(new Response($body, $result['code']));
     }
