@@ -6,8 +6,18 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api/
+            anonymous: true
+            stateless: true
+            guard:
+                authenticators:
+                    - 'jwt_token_authenticator'
         main:
             anonymous: true
+            form_login:
+                check_path: security_login_check
+                login_path: security_login_form
 
             # activate different ways to authenticate
 
