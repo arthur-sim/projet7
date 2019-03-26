@@ -105,6 +105,15 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "phpdocumentor/reflection-common": {
+        "version": "1.0.1"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "4.3.0"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "0.4.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -125,6 +134,9 @@
             "version": "5.2",
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
+    },
+    "symfony/asset": {
+        "version": "v4.2.4"
     },
     "symfony/cache": {
         "version": "v4.2.3"
@@ -222,6 +234,9 @@
     "symfony/property-access": {
         "version": "v4.2.3"
     },
+    "symfony/property-info": {
+        "version": "v4.2.4"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -234,11 +249,34 @@
     "symfony/stopwatch": {
         "version": "v4.2.3"
     },
+    "symfony/twig-bridge": {
+        "version": "v4.2.4"
+    },
+    "symfony/twig-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "369b5b29dc52b2c190002825ae7ec24ab6f962dd"
+        },
+        "files": [
+            "./config/packages/twig.yaml",
+            "./config/routes/dev/twig.yaml",
+            "./templates/base.html.twig"
+        ]
+    },
     "symfony/var-exporter": {
         "version": "v4.2.3"
     },
     "symfony/yaml": {
         "version": "v4.2.3"
+    },
+    "twig/twig": {
+        "version": "v2.7.3"
+    },
+    "webmozart/assert": {
+        "version": "1.4.0"
     },
     "zendframework/zend-code": {
         "version": "3.3.1"

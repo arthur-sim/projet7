@@ -7,10 +7,19 @@ use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Swagger\Annotations as SWG;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 class UserController extends AbstractController
 {
     /**
+     * List User by group : user.lite
+     * 
+     * @SWG\Response(
+     *     description="Returns users",
+     *     response=200,
+     *     @Model(type=User::class, groups={"user.lite"})
+     * )
      * @Route("/user", name="user_index", methods={ "GET" })
      */
     public function indexAction()
@@ -24,6 +33,13 @@ class UserController extends AbstractController
     }
 
     /**
+     * List a User by id
+     * 
+     * @SWG\Response(
+     *     description="Returns a user ",
+     *     response=200,
+     *     @Model(type=User::class)
+     * )
      * @Route("/user/{id}", name="user_show", methods={ "GET" })
      */
     public function showAction(User $user)
@@ -32,6 +48,13 @@ class UserController extends AbstractController
     }
 
     /**
+     * Delete user
+     * 
+     * @SWG\Response(
+     *     description="delete a user",
+     *     response=200,
+     *     @Model(type=User::class)
+     * )
      * @Route("/user/{id}", name="user_delete", methods={ "DELETE" })
      */
     public function deleteAction(User $user)
@@ -44,6 +67,13 @@ class UserController extends AbstractController
     }
 
     /**
+     * New User
+     * 
+     * @SWG\Response(
+     *     description="create user",
+     *     response=200,
+     *     @Model(type=User::class)
+     * )
      * @Route("/user", name="user_create", methods={ "POST" })
      *
      * @example body: {"name":"Honor 9", "memory":"32Gb"}
@@ -66,6 +96,13 @@ class UserController extends AbstractController
     }
 
     /**
+     * User edition
+     * 
+     * @SWG\Response(
+     *     description="edit a user",
+     *     response=200,
+     *     @Model(type=User::class)
+     * )
      * @Route("/user/{id}", name="user_modify", methods={ "PUT" })
      *
      * @example body: {"name":"Honor 9", "memory":"32Gb"}
