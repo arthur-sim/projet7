@@ -29,7 +29,7 @@ class UserController extends AbstractController
 
         $users = $userRepository->findAll();
 
-        return $this->json($users, 200, [], ['groups' => ['user.lite']]);
+        return $this->json($users, 200, [], ['groups' => ['user']]);
     }
 
     /**
@@ -38,13 +38,13 @@ class UserController extends AbstractController
      * @SWG\Response(
      *     description="Returns a user ",
      *     response=200,
-     *     @Model(type=User::class)
+     *     @Model(type=User::class, groups={"user"})
      * )
      * @Route("/user/{id}", name="user_show", methods={ "GET" })
      */
     public function showAction(User $user)
     {
-        return $this->json($user);
+        return $this->json($users, 200, [], ['groups' => ['user.lite']]);
     }
 
     /**
@@ -53,7 +53,7 @@ class UserController extends AbstractController
      * @SWG\Response(
      *     description="delete a user",
      *     response=200,
-     *     @Model(type=User::class)
+     *     @Model(type=User::class,groups={"user"})
      * )
      * @Route("/user/{id}", name="user_delete", methods={ "DELETE" })
      */
@@ -68,11 +68,15 @@ class UserController extends AbstractController
 
     /**
      * New User
-     * 
+     * @SWG\Parameter(
+     *  name="create user", 
+     *  in="body",
+     *  @Model(type=UserType::class)
+     * )
      * @SWG\Response(
      *     description="create user",
      *     response=200,
-     *     @Model(type=User::class)
+     *     @Model(type=User::class,groups={"user"})
      * )
      * @Route("/user", name="user_create", methods={ "POST" })
      *
@@ -97,11 +101,15 @@ class UserController extends AbstractController
 
     /**
      * User edition
-     * 
+     * @SWG\Parameter(
+     *  name="modify user", 
+     *  in="body",
+     *  @Model(type=UserType::class)
+     * )
      * @SWG\Response(
      *     description="edit a user",
      *     response=200,
-     *     @Model(type=User::class)
+     *     @Model(type=User::class, groups={"user"})
      * )
      * @Route("/user/{id}", name="user_modify", methods={ "PUT" })
      *
