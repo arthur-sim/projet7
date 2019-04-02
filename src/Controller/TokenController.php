@@ -5,10 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class TokenController extends AbstractController{
 
@@ -18,20 +18,20 @@ class TokenController extends AbstractController{
      * @Method("POST")
      */
     public function newTokenAction(Request $request) {
-        $user = $this->getDoctrine()
-                ->getRepository('AppBundle:User')
-                ->findOneBy(['username' => $request->getUser()]);
-        if (!$user) {
+        $customer = $this->getDoctrine()
+                ->getRepository('App:Customer')
+                ->findOneBy(['name' => $request->getCustomer()]);
+        if (!$customer) {
             throw $this->createNotFoundException();
         }
         $isValid = $this->get('security.password_encoder')
-                ->isPasswordValid($user, $request->getPassword());
+                ->isPasswordValid($customer, $request->getPassword());
         if (!$isValid) {
             throw new BadCredentialsException();
         }
         $token = $this->get('lexik_jwt_authentication.encoder')
                 ->encode([
-            'username' => $user->getUsername(),
+            'name' => $customer->getName(),
             'exp' => time() + 3600 // 1 heure avant expiration
         ]);
         return new JsonResponse(['token' => $token]);
