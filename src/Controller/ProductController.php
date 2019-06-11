@@ -34,6 +34,13 @@ use App\Controller\AbstractApiController;
 class ProductController extends AbstractApiController {
 
     /**
+     * List Product by group : product.lite
+     * 
+     * @SWG\Response(
+     *     description="Returns products",
+     *     response=200,
+     *     @Model(type=Product::class, groups={"product.lite"})
+     * )
      * @Route("/product", name="product_index", methods={ "GET" })
      */
     public function indexAction( SerializerInterface $serializer ) {
@@ -47,6 +54,13 @@ class ProductController extends AbstractApiController {
     }
 
     /**
+     * List a Product by id
+     * 
+     * @SWG\Response(
+     *     description="Returns a product ",
+     *     response=200,
+     *     @Model(type=Product::class)
+     * )
      * @Route("/product/{id}", name="product_show", methods={ "GET" })
      */
     public function showAction(Product $product) {

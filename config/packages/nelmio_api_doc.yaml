@@ -1,0 +1,19 @@
+nelmio_api_doc:
+    documentation:
+        host: api.example.com
+        schemes: [http, https]
+        info:
+            title: BileMo
+            description: Bilemo's Api
+            version: 1.0.0
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                description: 'Value: Bearer {jwt}'
+                name: Authorization
+                in: header
+        security:
+            - Bearer: []
+    areas:
+        path_patterns: # an array of regexps
+            - ^/(?!_doc(\.json)?$)
