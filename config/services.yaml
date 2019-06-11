@@ -31,3 +31,4 @@ services:
             - { type: 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException' }
         tags:
             - { name: app.normalizer }
+            

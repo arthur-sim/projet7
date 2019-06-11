@@ -2,6 +2,22 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/wamp64/www/projet7/config/packages/security.yaml</file>
+            <file>file:/C:/wamp64/www/projet7/src/Entity/User.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/Form/UserType.php</file>
+            <file>file:/C:/wamp64/www/projet7/composer.json</file>
+            <file>file:/C:/wamp64/www/projet7/.env</file>
+            <file>file:/C:/wamp64/www/projet7/src/Controller/TokenController.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/Form/ProductType.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/Controller/ProductController.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/Entity/Product.php</file>
+            <file>file:/C:/wamp64/www/projet7/config/services.yaml</file>
+            <file>file:/C:/wamp64/www/projet7/src/Controller/CustomerController.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/Form/CustomerType.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/Controller/UserController.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/EventSubscriber/ExceptionSubscriber.php</file>
+            <file>file:/C:/wamp64/www/projet7/config/routes.yaml</file>
+        </group>
     </open-files>
 </project-private>

@@ -21,6 +21,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     }
     public function processException(GetResponseForExceptionEvent $event)
     {
+        return;
         $result = null;
         foreach ($this->normalizers as $normalizer) {
             if ($normalizer->supports($event->getException())) {
