@@ -18,6 +18,15 @@
             <file>file:/C:/wamp64/www/projet7/src/Controller/UserController.php</file>
             <file>file:/C:/wamp64/www/projet7/src/EventSubscriber/ExceptionSubscriber.php</file>
             <file>file:/C:/wamp64/www/projet7/config/routes.yaml</file>
+            <file>file:/C:/wamp64/www/projet7/config/packages/dev/jms_serializer.yaml</file>
+            <file>file:/C:/wamp64/www/projet7/src/Controller/ProductController.php</file>
+            <file>file:/C:/wamp64/www/projet7/config/services.yaml</file>
+            <file>file:/C:/wamp64/www/projet7/config/bazinga_hateoas.yaml</file>
+            <file>file:/C:/wamp64/www/projet7/src/Controller/CustomerController.php</file>
+            <file>file:/C:/wamp64/www/projet7/src/Controller/AbstractApiController.php</file>
+            <file>file:/C:/wamp64/www/projet7/config/packages/jms_serializer.yaml</file>
+            <file>file:/C:/wamp64/www/projet7/.env</file>
+            <file>file:/C:/wamp64/www/projet7/config/bundles.php</file>
         </group>
     </open-files>
 </project-private>

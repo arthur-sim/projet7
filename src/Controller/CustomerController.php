@@ -7,7 +7,29 @@ use App\Form\CustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Hateoas\Configuration\Annotation as Hateoas;
 
+/**
+ * @Hateoas\Relation(
+ *  "index",
+ *      href = @Hateoas\Route(
+ *          "customer_index",
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(
+ *          excludeIf = "expr(not is_granted(['ROLE_ADMIN']))"
+ *      )
+ * )
+ * @Hateoas\Relation(
+ *  "showById",
+ *      href = @Hateoas\Route(
+ *          "customer_show",
+ *          parameters = { "id" = "expr(object.getId())" }
+ *      ),
+ *      exclusion = @Hateoas\Exclusion(
+ *          excludeIf = "expr(not is_granted(['ROLE_ADMIN']))"
+ *      )
+ * )
+ */
 class CustomerController extends AbstractController
 {
     /**
