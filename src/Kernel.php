@@ -8,8 +8,11 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use App\EventSubscriber\ExceptionSubscriber;
+use Symfony\Component\DependencyInjection\Reference;
 
-class Kernel extends BaseKernel
+class Kernel extends BaseKernel implements CompilerPassInterface
 {
     use MicroKernelTrait;
 
@@ -45,4 +48,14 @@ class Kernel extends BaseKernel
         $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
+
+    public function process(ContainerBuilder $container) {
+        $exceptionListenerDefinition = $container->findDefinition(ExceptionSubscriber::class);
+        $normalizers = $container->findTaggedServiceIds('app.normalizer');
+
+        foreach ($normalizers as $id => $tags) {
+            $exceptionListenerDefinition->addMethodCall('addNormalizer', [new Reference($id)]);
+        }
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
@@ -14,16 +15,19 @@ class Product
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"product.lite"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string")
+     * @Groups({"product.lite"})
      */
     private $brand;
     
     /**
      * @ORM\Column(type="string")
+     * @Groups({"product.lite"})
      */
     private $name;
     
