@@ -20,7 +20,6 @@
         "symfony/security-bundle": "4.2.*",
         "symfony/serializer": "4.2.*",
         "symfony/twig-bundle": "4.2.*",
-        "symfony/yaml": "4.2.*"
         "symfony/yaml": "4.2.*",
         "willdurand/hateoas-bundle": "^1.4"
     },
