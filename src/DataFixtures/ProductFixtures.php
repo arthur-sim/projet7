@@ -23,11 +23,11 @@ class ProductFixtures extends Fixture
     private function getProductData(): array
     {
         return [
-                ['Samsung','GalaxyS10', '2019'],
-                ['Samsung','GalaxyS9', '2018'],
-                ['Samsung','GalaxyS8', '2017'],
-                ['Samsung','GalaxyS7', '2016'],
-                ['Samsung','GalaxyS6', '2015']
+                ['Samsung1','GalaxyS10', '2019'],
+                ['Samsung2','GalaxyS9', '2018'],
+                ['Samsung3','GalaxyS8', '2017'],
+                ['Samsung4','GalaxyS7', '2016'],
+                ['Samsung5','GalaxyS6', '2015']
             ];
     }
 

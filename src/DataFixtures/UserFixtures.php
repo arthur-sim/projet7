@@ -11,9 +11,11 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {     
-        foreach ($this->getUserData() as [$adress, $postalCode, $state, $city]) {
+        foreach ($this->getUserData() as [$last_name, $first_name,$adress, $postalCode, $state, $city]) {
             $customer = $this->getReference('customer_'.rand(0, CustomerFixtures::$nbCustomers));
             $user = (new User())
+                    ->setLastName($last_name)
+                    ->setFirstName($first_name)
                     ->setAdress($adress)
                     ->setPostalCode($postalCode)
                     ->setState($state)
@@ -28,10 +30,10 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
     private function getUserData(): array
     {
         return [
-            ['12 avenue maguy barbaroux', '13400', 'france', 'aubagne'],
-            ['12 rue paradis', '13990', 'france', 'pin vert'], 
-            ['24 avenue maguy barbaroux', '13400', 'france', 'aubagne'], 
-            ['52 impasse chrales comté', '15900', 'france', 'cuges']
+            ['test','test','12 avenue maguy barbaroux', '13400', 'france', 'aubagne'],
+            ['test','test','12 rue paradis', '13990', 'france', 'pin vert'], 
+            ['test','test','24 avenue maguy barbaroux', '13400', 'france', 'aubagne'], 
+            ['test','test','52 impasse chrales comté', '15900', 'france', 'cuges']
         ];
     }
  

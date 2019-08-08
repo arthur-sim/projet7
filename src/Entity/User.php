@@ -77,10 +77,12 @@ class User {
 
     function setLastName($lastName) {
         $this->lastName = $lastName;
+        return $this;
     }
 
     function setFirstName($firstName) {
         $this->firstName = $firstName;
+        return $this;
     }
 
         
