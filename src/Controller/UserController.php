@@ -132,7 +132,7 @@ class UserController extends AbstractController {
      *     response=200,
      *     @Model(type=User::class,groups={"user"})
      * )
-     * @Route("/user", name="user_create", methods={ "POST" })
+     * @Route("/user/create", name="user_create", methods={ "POST" })
      *
      * @example body: {"name":"Honor 9", "memory":"32Gb"}
      */
