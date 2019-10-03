@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/token", name="security_token")
+     * @Route("/token", name="security_token", methods={ "GET" })
      * @throws Exception
      */
     public function tokenAction()

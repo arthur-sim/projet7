@@ -3,6 +3,7 @@
 namespace App\Normalizer;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class NotFoundHttpExceptionNormalizer extends AbstractNormalizer
 {
@@ -17,4 +18,11 @@ class NotFoundHttpExceptionNormalizer extends AbstractNormalizer
 
         return $result;
     }
+    
+    protected function getSupportedExceptions(): array {
+        return [
+            NotFoundHttpException::class
+        ];
+    }
+
 }

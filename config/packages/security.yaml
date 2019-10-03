@@ -24,6 +24,11 @@ security:
             guard:
                 authenticators:
                     - App\Security\BasicAuthenticator
+        
+        doc:
+            pattern: ^/_doc
+            anonymous: true
+        
         api:
             pattern:   ^/
             stateless: true

@@ -1,30 +1,13 @@
 <?php
-namespace App\Controller;
 
+namespace App\Service;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use JMS\Serializer\SerializerInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 
-class AbstractApiController extends AbstractController
-{
-    private $serializer;
-    
-    public function __construct(SerializerInterface $serializer){
-        $this->serializer = $serializer;
-    }
-    
-    protected function json($data, int $status = 200, array $headers = [], array $context = []): JsonResponse
-    {
-        
-            $json = $this->serializer->serialize($data, 'json');
+class SerializeFormError {
 
-            return new JsonResponse($json, $status, $headers, true);
-        
-    }
-    
-    public function serializeErrors(FormInterface $form): array
+    public function serializeErrors(Form $form): array
 	{
 		$errors = [];
 		foreach ($form->getErrors() as $formError) {
@@ -54,4 +37,5 @@ class AbstractApiController extends AbstractController
 		}
 		return $errors;
 	}
+
 }

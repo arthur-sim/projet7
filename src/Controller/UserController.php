@@ -10,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Hateoas\Configuration\Annotation as Hateoas;
 use Swagger\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use App\Service\SerializeFormError;
+use App\Exception\FormErrorException;
 
 /**
  * @Hateoas\Relation(
@@ -66,7 +68,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
  *      )
  * )
  */
-class UserController extends AbstractController {
+class UserController extends AbstractApiController {
 
     /**
      * List User by group : user.lite
@@ -99,7 +101,7 @@ class UserController extends AbstractController {
      */
     public function showAction(User $user)
     {
-        return $this->json($users, 200, [], ['groups' => ['user.lite']]);
+        return $this->json($user, 200, [], ['groups' => ['user.lite']]);
     }
 
     /**
@@ -132,15 +134,15 @@ class UserController extends AbstractController {
      *     response=200,
      *     @Model(type=User::class,groups={"user"})
      * )
-     * @Route("/user/create", name="user_create", methods={ "POST" })
+     * @Route("/user/", name="user_create", methods={ "POST" })
      *
      * @example body: {"name":"Honor 9", "memory":"32Gb"}
      */
     public function createAction(Request $request) {
         $user = new User();
         $userForm = $this->createForm(UserType::class, $user);
-
-        $userForm->submit(json_decode($request->getContent(), true));
+        $user->setCustomer($this->getUser());
+        $userForm->submit($request->request->all());
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -148,10 +150,14 @@ class UserController extends AbstractController {
 
             return $this->json(['message' => 'success'], 201);
         }
-
-        return $this->json(['message' => 'error'], 400);
+        throw new FormErrorException($userForm);
+//        return $this->json(['errors' => $this->serializeErrors($userForm) ], 400);
+        
+        
     }
 
+    
+    
     /**
      * User edition
      * @SWG\Parameter(
@@ -168,10 +174,12 @@ class UserController extends AbstractController {
      *
      * @example body: {"name":"Honor 9", "memory":"32Gb"}
      */
-    public function modifyAction(Request $request, User $user) {
-        $userForm = $this->createForm(UserType::class, $user);
+    public function modifyAction(Request $request, User $user, SerializeFormError $serialize) {
 
-        $userForm->submit(json_decode($request->getContent(), true));
+        $userForm = $this->createForm(UserType::class, $user);
+                var_dump(json_decode($request->getContent()));
+        $userForm->submit(json_decode($request->getContent()));
+
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
@@ -179,7 +187,7 @@ class UserController extends AbstractController {
             return $this->json(['message' => 'success'], 200);
         }
 
-        return $this->json(['message' => 'error'], 400);
+        return $this->json($serialize->serializeErrors($userForm), 400);
     }
 
 }
