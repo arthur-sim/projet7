@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -23,6 +24,7 @@ class User {
      * @ORM\Column(type="string", length=255)
      * @Groups({"user.lite"})
      * @Groups({"user"})
+     * @Assert\NotNull
      */
     private $lastName;
 
