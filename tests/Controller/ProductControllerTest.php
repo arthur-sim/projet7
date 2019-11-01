@@ -106,11 +106,11 @@ class ProductControllerTest extends WebTestCase
     public function testGetOneProductWithToken()
     {
         $client = $this->createAuthenticatedClient();
-        $client->request('GET', '/product/1');
+        $client->request('GET', '/product/8');
         
         $this->assertSame(200, $client->getResponse()->getStatusCode());  
         $body = json_decode($client->getResponse()->getContent(), true);
-        $this->assertSame('GalaxyS10', $body['name']);   
+        $this->assertSame('GalaxyS8', $body['name']);   
         
         
     }

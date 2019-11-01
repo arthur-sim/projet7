@@ -114,41 +114,4 @@ class UserControllerTest extends WebTestCase
         $this->secondClient->request('GET', '/user/1');
         $this->assertSame(401, $this->secondClient->getResponse()->getStatusCode());  
     }
-   
-    public function testNegativeDeleteUser()
-    {
-        $client = $this->createAuthenticatedClient();
-        $client->request('DELETE', '/user/150');
-        // id user is not good
-        $this->assertEquals(404, $client->getResponse()->getStatusCode());
-    }
-    
-    public function testCreateUser()
-    {
-        $client = $this->createAuthenticatedClient();
-        $client->request('POST', '/user/create',[
-            'firstName' => 'testUsername',
-            'lastName' => 'testPassword',
-            'adress' => 'testadeda',
-            'postalCode' => '151513',
-            'state' => 'state',
-            'city'=> 'testcity']
-        );
-        
-        $this->assertSame(201, $client->getResponse()->getStatusCode());
-    }
-   
-    public function testUpdateUser()
-    {
-        $client = $this->createAuthenticatedClient();
-        $client->request('PUT', '/user/edit/1',[
-            'firstName' => 'testUpdateUsername',
-            'lastName' => 'testUpdatePassword',
-            'adress' => 'testUpdateadeda',
-            'postalCode' => '151513',
-            'state' => 'Updatestate',
-            'city'=> 'Updatetestcity']
-        );
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
-    }
 }
