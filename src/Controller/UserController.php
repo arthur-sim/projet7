@@ -12,6 +12,7 @@ use Swagger\Annotations as SWG;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use App\Service\SerializeFormError;
 use App\Exception\FormErrorException;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @Hateoas\Relation(
@@ -151,12 +152,7 @@ class UserController extends AbstractApiController {
             return $this->json(['message' => 'success'], 201);
         }
         throw new FormErrorException($userForm);
-//        return $this->json(['errors' => $this->serializeErrors($userForm) ], 400);
-        
-        
     }
-
-    
     
     /**
      * User edition
@@ -177,7 +173,6 @@ class UserController extends AbstractApiController {
     public function modifyAction(Request $request, User $user, SerializeFormError $serialize) {
 
         $userForm = $this->createForm(UserType::class, $user);
-                var_dump(json_decode($request->getContent()));
         $userForm->submit(json_decode($request->getContent()));
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
