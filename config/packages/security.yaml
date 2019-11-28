@@ -9,6 +9,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         login:
             pattern:  ^/api/login
             stateless: true
@@ -23,6 +24,11 @@ security:
             guard:
                 authenticators:
                     - App\Security\BasicAuthenticator
+        
+        doc:
+            pattern: ^/_doc
+            anonymous: true
+        
         api:
             pattern:   ^/
             stateless: true

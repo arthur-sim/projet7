@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use App\EventSubscriber\ExceptionSubscriber;
 use Symfony\Component\DependencyInjection\Reference;
 
-class Kernel extends BaseKernel implements CompilerPassInterface
+class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
@@ -49,13 +49,5 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
     }
 
-    public function process(ContainerBuilder $container) {
-        $exceptionListenerDefinition = $container->findDefinition(ExceptionSubscriber::class);
-        $normalizers = $container->findTaggedServiceIds('app.normalizer');
-
-        foreach ($normalizers as $id => $tags) {
-            $exceptionListenerDefinition->addMethodCall('addNormalizer', [new Reference($id)]);
-        }
-    }
 
 }

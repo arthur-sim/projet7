@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\EventListener;
 
 use App\Normalizer\NormalizerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -9,19 +9,21 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use JMS\Serializer\SerializerInterface;
 
-class ExceptionSubscriber implements EventSubscriberInterface
+class ExceptionListener
 {
     private $normalizers;
     private $serializer;
-
-    public function __construct(SerializerInterface $serializer)
+    
+    
+    public function __construct(iterable $normalizers, SerializerInterface $serializer)
     {
+//        print_r($normalizers);
+        $this->normalizers = $normalizers;
         $this->serializer = $serializer;
-        $this->normalizers = [];
+        
     }
-    public function processException(GetResponseForExceptionEvent $event)
+    public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        return;
         $result = null;
         foreach ($this->normalizers as $normalizer) {
             if ($normalizer->supports($event->getException())) {
@@ -45,15 +47,5 @@ class ExceptionSubscriber implements EventSubscriberInterface
         $event->setResponse(new Response($body, $result['code']));
     }
 
-    public function addNormalizer(NormalizerInterface $normalizer)
-    {
-        $this->normalizers[] = $normalizer;
-    }
-    
-    public static function getSubscribedEvents()
-    {
-        return [
-            KernelEvents::EXCEPTION => [['processException', 255]]
-        ];
-    }
+
 }

@@ -14,4 +14,6 @@ return [
     Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle::class => ['all' => true],
     Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
+    Liip\TestFixturesBundle\LiipTestFixturesBundle::class => ['all' => true],
+    Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
 ];
